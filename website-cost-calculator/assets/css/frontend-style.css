@@ -1,0 +1,979 @@
+/**
+ * Website Cost Calculator - Frontend Styles
+ * A modern, beautiful calculator interface
+ */
+
+/* CSS Variables (can be overridden by plugin options) */
+:root {
+    --wcc-primary: #4F46E5;
+    --wcc-primary-hover: #4338CA;
+    --wcc-primary-light: #EEF2FF;
+    --wcc-secondary: #10B981;
+    --wcc-secondary-hover: #059669;
+    --wcc-accent: #F59E0B;
+    --wcc-text: #1F2937;
+    --wcc-text-light: #6B7280;
+    --wcc-text-lighter: #9CA3AF;
+    --wcc-background: #F9FAFB;
+    --wcc-white: #FFFFFF;
+    --wcc-border: #E5E7EB;
+    --wcc-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --wcc-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --wcc-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --wcc-radius: 12px;
+    --wcc-radius-sm: 8px;
+    --wcc-transition: all 0.2s ease;
+}
+
+/* Calculator Container */
+.wcc-calculator {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: var(--wcc-background);
+    border-radius: var(--wcc-radius);
+    padding: 40px;
+    max-width: 1000px;
+    margin: 40px auto;
+    box-shadow: var(--wcc-shadow-lg);
+    position: relative;
+}
+
+.wcc-calculator * {
+    box-sizing: border-box;
+}
+
+/* Progress Bar */
+.wcc-progress {
+    margin-bottom: 40px;
+}
+
+.wcc-progress-bar {
+    height: 4px;
+    background: var(--wcc-border);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.wcc-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--wcc-primary), var(--wcc-secondary));
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.wcc-progress-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.wcc-progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    flex: 1;
+    opacity: 0.5;
+    transition: var(--wcc-transition);
+}
+
+.wcc-progress-step.active,
+.wcc-progress-step.completed {
+    opacity: 1;
+}
+
+.wcc-progress-step.completed {
+    cursor: pointer;
+}
+
+.wcc-step-number {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--wcc-border);
+    color: var(--wcc-text-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--wcc-transition);
+}
+
+.wcc-progress-step.active .wcc-step-number {
+    background: var(--wcc-primary);
+    color: var(--wcc-white);
+    box-shadow: 0 0 0 4px var(--wcc-primary-light);
+}
+
+.wcc-progress-step.completed .wcc-step-number {
+    background: var(--wcc-secondary);
+    color: var(--wcc-white);
+}
+
+.wcc-step-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--wcc-text-light);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.wcc-progress-step.active .wcc-step-label {
+    color: var(--wcc-primary);
+    font-weight: 600;
+}
+
+/* Steps Container */
+.wcc-steps-container {
+    min-height: 400px;
+}
+
+.wcc-step {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.wcc-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Step Header */
+.wcc-step-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.wcc-step-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--wcc-text);
+    margin: 0 0 8px 0;
+    line-height: 1.3;
+}
+
+.wcc-step-header p {
+    font-size: 16px;
+    color: var(--wcc-text-light);
+    margin: 0;
+}
+
+/* Sections */
+.wcc-section {
+    margin-bottom: 32px;
+}
+
+.wcc-section-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--wcc-text);
+    margin: 0 0 16px 0;
+}
+
+/* Card Options */
+.wcc-options-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.wcc-card {
+    position: relative;
+    background: var(--wcc-white);
+    border: 2px solid var(--wcc-border);
+    border-radius: var(--wcc-radius);
+    padding: 24px;
+    cursor: pointer;
+    transition: var(--wcc-transition);
+    text-align: center;
+}
+
+.wcc-card:hover {
+    border-color: var(--wcc-primary);
+    transform: translateY(-2px);
+    box-shadow: var(--wcc-shadow);
+}
+
+.wcc-card.selected {
+    border-color: var(--wcc-primary);
+    background: var(--wcc-primary-light);
+}
+
+.wcc-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.wcc-card-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 16px;
+    color: var(--wcc-primary);
+}
+
+.wcc-card-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wcc-card-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--wcc-text);
+    margin: 0 0 8px 0;
+}
+
+.wcc-card-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--wcc-primary);
+}
+
+.wcc-card-check {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 24px;
+    background: var(--wcc-primary);
+    border-radius: 50%;
+    color: var(--wcc-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: var(--wcc-transition);
+}
+
+.wcc-card-check svg {
+    width: 14px;
+    height: 14px;
+}
+
+.wcc-card.selected .wcc-card-check {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Button Options */
+.wcc-options-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.wcc-button-option {
+    position: relative;
+    flex: 1;
+    min-width: 120px;
+}
+
+.wcc-button-option.wcc-button-wide {
+    flex-basis: 100%;
+}
+
+.wcc-button-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.wcc-button-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: var(--wcc-white);
+    border: 2px solid var(--wcc-border);
+    border-radius: var(--wcc-radius-sm);
+    cursor: pointer;
+    transition: var(--wcc-transition);
+}
+
+.wcc-button-option:hover .wcc-button-content {
+    border-color: var(--wcc-primary);
+}
+
+.wcc-button-option.selected .wcc-button-content,
+.wcc-button-option input:checked + .wcc-button-content {
+    border-color: var(--wcc-primary);
+    background: var(--wcc-primary-light);
+}
+
+.wcc-button-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--wcc-text);
+}
+
+.wcc-button-price {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--wcc-primary);
+    background: var(--wcc-primary-light);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.wcc-button-multiplier {
+    background: var(--wcc-accent);
+    color: var(--wcc-white);
+}
+
+/* Checkbox Options */
+.wcc-options-checklist {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+}
+
+.wcc-checkbox-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--wcc-white);
+    border: 2px solid var(--wcc-border);
+    border-radius: var(--wcc-radius-sm);
+    cursor: pointer;
+    transition: var(--wcc-transition);
+}
+
+.wcc-checkbox-option:hover {
+    border-color: var(--wcc-primary);
+}
+
+.wcc-checkbox-option.selected {
+    border-color: var(--wcc-primary);
+    background: var(--wcc-primary-light);
+}
+
+.wcc-checkbox-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.wcc-checkbox-box {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border: 2px solid var(--wcc-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--wcc-transition);
+    color: var(--wcc-white);
+}
+
+.wcc-checkbox-box svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transform: scale(0);
+    transition: var(--wcc-transition);
+}
+
+.wcc-checkbox-option.selected .wcc-checkbox-box,
+.wcc-checkbox-option input:checked + .wcc-checkbox-box {
+    background: var(--wcc-primary);
+    border-color: var(--wcc-primary);
+}
+
+.wcc-checkbox-option.selected .wcc-checkbox-box svg,
+.wcc-checkbox-option input:checked + .wcc-checkbox-box svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.wcc-checkbox-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+    gap: 8px;
+}
+
+.wcc-checkbox-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wcc-text);
+}
+
+.wcc-checkbox-price {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--wcc-secondary);
+    white-space: nowrap;
+}
+
+/* Summary Container */
+.wcc-summary-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.wcc-summary-card,
+.wcc-contact-card {
+    background: var(--wcc-white);
+    border-radius: var(--wcc-radius);
+    padding: 24px;
+    box-shadow: var(--wcc-shadow);
+}
+
+.wcc-summary-card h3,
+.wcc-contact-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--wcc-text);
+    margin: 0 0 16px 0;
+}
+
+/* Summary Items */
+.wcc-summary-items {
+    border-bottom: 1px solid var(--wcc-border);
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.wcc-summary-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--wcc-border);
+}
+
+.wcc-summary-item:last-child {
+    border-bottom: none;
+}
+
+.wcc-summary-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    max-width: 70%;
+}
+
+.wcc-summary-category {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--wcc-text-lighter);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.wcc-summary-description {
+    font-size: 14px;
+    color: var(--wcc-text);
+    word-wrap: break-word;
+}
+
+.wcc-summary-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--wcc-text);
+}
+
+/* Summary Totals */
+.wcc-summary-total {
+    padding-top: 8px;
+}
+
+.wcc-summary-subtotal,
+.wcc-summary-timeline-cost,
+.wcc-summary-monthly {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 14px;
+    color: var(--wcc-text-light);
+}
+
+.wcc-summary-grand-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--wcc-text);
+    border-top: 2px solid var(--wcc-border);
+    margin-top: 8px;
+}
+
+.wcc-summary-grand-total span:last-child {
+    color: var(--wcc-primary);
+}
+
+/* Contact Form */
+.wcc-contact-card p {
+    font-size: 14px;
+    color: var(--wcc-text-light);
+    margin: 0 0 20px 0;
+}
+
+.wcc-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.wcc-form-row {
+    display: flex;
+    gap: 16px;
+}
+
+.wcc-form-row-half .wcc-form-field {
+    flex: 1;
+}
+
+.wcc-form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+}
+
+.wcc-form-field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--wcc-text);
+}
+
+.wcc-form-field label .required {
+    color: #EF4444;
+}
+
+.wcc-form-field input,
+.wcc-form-field textarea {
+    padding: 12px 14px;
+    border: 2px solid var(--wcc-border);
+    border-radius: var(--wcc-radius-sm);
+    font-size: 15px;
+    color: var(--wcc-text);
+    transition: var(--wcc-transition);
+    font-family: inherit;
+}
+
+.wcc-form-field input:focus,
+.wcc-form-field textarea:focus {
+    outline: none;
+    border-color: var(--wcc-primary);
+    box-shadow: 0 0 0 3px var(--wcc-primary-light);
+}
+
+.wcc-form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Submit Button */
+.wcc-submit-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, var(--wcc-primary), var(--wcc-primary-hover));
+    color: var(--wcc-white);
+    border: none;
+    border-radius: var(--wcc-radius-sm);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--wcc-transition);
+    width: 100%;
+}
+
+.wcc-submit-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: var(--wcc-shadow-lg);
+}
+
+.wcc-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.wcc-spinner {
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Form Success */
+.wcc-form-success {
+    text-align: center;
+    padding: 32px;
+}
+
+.wcc-success-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    color: var(--wcc-secondary);
+}
+
+.wcc-success-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.wcc-form-success h4 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--wcc-text);
+    margin: 0 0 8px 0;
+}
+
+.wcc-form-success p {
+    font-size: 15px;
+    color: var(--wcc-text-light);
+    margin: 0;
+}
+
+/* Navigation Buttons */
+.wcc-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--wcc-border);
+}
+
+.wcc-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--wcc-radius-sm);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--wcc-transition);
+}
+
+.wcc-nav-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.wcc-prev-btn {
+    background: var(--wcc-white);
+    color: var(--wcc-text);
+    border: 2px solid var(--wcc-border);
+}
+
+.wcc-prev-btn:hover {
+    border-color: var(--wcc-text);
+    background: var(--wcc-background);
+}
+
+.wcc-next-btn {
+    background: var(--wcc-primary);
+    color: var(--wcc-white);
+    border: 2px solid var(--wcc-primary);
+    margin-left: auto;
+}
+
+.wcc-next-btn:hover {
+    background: var(--wcc-primary-hover);
+    border-color: var(--wcc-primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--wcc-shadow);
+}
+
+/* Floating Price */
+.wcc-floating-price {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--wcc-text);
+    color: var(--wcc-white);
+    padding: 16px 24px;
+    border-radius: 50px;
+    box-shadow: var(--wcc-shadow-xl);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 100;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.wcc-floating-label {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.wcc-floating-amount {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--wcc-accent);
+}
+
+/* Error Messages */
+.wcc-error-message {
+    background: #FEE2E2;
+    color: #DC2626;
+    padding: 12px 16px;
+    border-radius: var(--wcc-radius-sm);
+    font-size: 14px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.wcc-error-message.shake {
+    animation: shake 0.5s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.wcc-form-error {
+    background: #FEE2E2;
+    color: #DC2626;
+    padding: 12px 16px;
+    border-radius: var(--wcc-radius-sm);
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wcc-calculator {
+        padding: 24px 16px;
+        margin: 20px 16px;
+    }
+
+    .wcc-progress-steps {
+        display: none;
+    }
+
+    .wcc-step-header h2 {
+        font-size: 22px;
+    }
+
+    .wcc-options-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .wcc-options-checklist {
+        grid-template-columns: 1fr;
+    }
+
+    .wcc-summary-container {
+        grid-template-columns: 1fr;
+    }
+
+    .wcc-form-row-half {
+        flex-direction: column;
+    }
+
+    .wcc-floating-price {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        justify-content: center;
+    }
+
+    .wcc-navigation {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .wcc-nav-btn {
+        justify-content: center;
+    }
+
+    .wcc-next-btn {
+        margin-left: 0;
+        order: -1;
+    }
+}
+
+@media (max-width: 480px) {
+    .wcc-calculator {
+        padding: 20px 12px;
+        margin: 10px;
+        border-radius: var(--wcc-radius-sm);
+    }
+
+    .wcc-step-header h2 {
+        font-size: 20px;
+    }
+
+    .wcc-card {
+        padding: 16px;
+    }
+
+    .wcc-card-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 12px;
+    }
+
+    .wcc-card-title {
+        font-size: 14px;
+    }
+
+    .wcc-card-price {
+        font-size: 16px;
+    }
+
+    .wcc-button-content {
+        padding: 12px 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .wcc-checkbox-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .wcc-summary-card,
+    .wcc-contact-card {
+        padding: 16px;
+    }
+
+    .wcc-summary-grand-total {
+        font-size: 18px;
+    }
+}
+
+/* Compact Mode */
+.wcc-compact .wcc-step-header {
+    margin-bottom: 20px;
+}
+
+.wcc-compact .wcc-step-header h2 {
+    font-size: 22px;
+}
+
+.wcc-compact .wcc-section {
+    margin-bottom: 20px;
+}
+
+.wcc-compact .wcc-card {
+    padding: 16px;
+}
+
+.wcc-compact .wcc-floating-price {
+    display: none;
+}
+
+/* Print Styles */
+@media print {
+    .wcc-calculator {
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .wcc-progress,
+    .wcc-navigation,
+    .wcc-floating-price,
+    .wcc-contact-card {
+        display: none !important;
+    }
+
+    .wcc-summary-container {
+        grid-template-columns: 1fr;
+    }
+
+    .wcc-step {
+        display: block !important;
+    }
+}
+
+/* Accessibility */
+.wcc-card:focus-within,
+.wcc-button-option:focus-within,
+.wcc-checkbox-option:focus-within {
+    outline: 2px solid var(--wcc-primary);
+    outline-offset: 2px;
+}
+
+.wcc-form-field input:focus,
+.wcc-form-field textarea:focus {
+    outline: none;
+}
+
+/* Screen reader only */
+.wcc-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .wcc-calculator {
+        border: 2px solid var(--wcc-text);
+    }
+
+    .wcc-card,
+    .wcc-button-content,
+    .wcc-checkbox-option {
+        border-width: 3px;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .wcc-calculator *,
+    .wcc-calculator *::before,
+    .wcc-calculator *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
