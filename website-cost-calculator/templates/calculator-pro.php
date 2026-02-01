@@ -1,15 +1,54 @@
 <?php
 /**
  * Pro Calculator Template - Premium Features
+ * Copyright (C) 2026 Haseeb Ur Rehman Mughal / EzyOnTech
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 
+// Define helper function BEFORE it's used
+if (!function_exists('wcc_get_industry_icon')) {
+    function wcc_get_industry_icon($icon) {
+        $icon_map = array(
+            'utensils' => 'coffee',
+            'shopping-cart' => 'shopping-cart',
+            'briefcase' => 'briefcase',
+            'heartbeat' => 'heart',
+            'home' => 'home',
+            'rocket' => 'rocket',
+            'heart' => 'heart',
+            'graduation-cap' => 'book',
+            'palette' => 'image',
+            'cog' => 'settings',
+        );
+        return isset($icon_map[$icon]) ? $icon_map[$icon] : 'circle';
+    }
+}
+
 $wcc = Website_Cost_Calculator::get_instance();
+$default_options = $wcc->get_default_options();
 $options = $wcc->get_options();
-$currency = $options['currency_symbol'] ?? '$';
+
+// Merge with defaults to ensure all keys exist
+$options = wp_parse_args($options, $default_options);
+
+// Ensure all required arrays exist
+$options['industry_presets'] = isset($options['industry_presets']) && is_array($options['industry_presets']) ? $options['industry_presets'] : $default_options['industry_presets'];
+$options['website_types'] = isset($options['website_types']) && is_array($options['website_types']) ? $options['website_types'] : $default_options['website_types'];
+$options['page_ranges'] = isset($options['page_ranges']) && is_array($options['page_ranges']) ? $options['page_ranges'] : $default_options['page_ranges'];
+$options['design_options'] = isset($options['design_options']) && is_array($options['design_options']) ? $options['design_options'] : $default_options['design_options'];
+$options['content_options'] = isset($options['content_options']) && is_array($options['content_options']) ? $options['content_options'] : $default_options['content_options'];
+$options['features'] = isset($options['features']) && is_array($options['features']) ? $options['features'] : $default_options['features'];
+$options['ecommerce_features'] = isset($options['ecommerce_features']) && is_array($options['ecommerce_features']) ? $options['ecommerce_features'] : $default_options['ecommerce_features'];
+$options['seo_marketing'] = isset($options['seo_marketing']) && is_array($options['seo_marketing']) ? $options['seo_marketing'] : $default_options['seo_marketing'];
+$options['timeline_options'] = isset($options['timeline_options']) && is_array($options['timeline_options']) ? $options['timeline_options'] : $default_options['timeline_options'];
+$options['hosting_options'] = isset($options['hosting_options']) && is_array($options['hosting_options']) ? $options['hosting_options'] : $default_options['hosting_options'];
+$options['maintenance_plans'] = isset($options['maintenance_plans']) && is_array($options['maintenance_plans']) ? $options['maintenance_plans'] : $default_options['maintenance_plans'];
+$options['form_settings'] = isset($options['form_settings']) && is_array($options['form_settings']) ? $options['form_settings'] : $default_options['form_settings'];
+
+$currency = isset($options['currency_symbol']) ? $options['currency_symbol'] : '$';
 $theme_class = isset($atts['theme']) ? 'wcc-theme-' . esc_attr($atts['theme']) : 'wcc-theme-default';
 $compact_class = isset($atts['compact']) && $atts['compact'] === 'true' ? 'wcc-compact' : '';
 $preselect_industry = isset($atts['industry']) ? esc_attr($atts['industry']) : '';
@@ -104,7 +143,7 @@ $preselect_industry = isset($atts['industry']) ? esc_attr($atts['industry']) : '
                            data-suggested-features="<?php echo esc_attr(json_encode($industry['suggested_features'] ?? [])); ?>">
                     <div class="wcc-industry-content">
                         <div class="wcc-industry-icon">
-                            <i data-feather="<?php echo esc_attr($this->get_industry_icon($industry['icon'])); ?>"></i>
+                            <i data-feather="<?php echo esc_attr(wcc_get_industry_icon($industry['icon'])); ?>"></i>
                         </div>
                         <h3><?php echo esc_html($industry['name']); ?></h3>
                         <p><?php echo esc_html($industry['description']); ?></p>
@@ -715,41 +754,3 @@ $preselect_industry = isset($atts['industry']) ? esc_attr($atts['industry']) : '
         </div>
     </div>
 </div>
-
-<?php
-// Helper function for industry icons
-function get_industry_icon($icon) {
-    $icon_map = array(
-        'utensils' => 'coffee',
-        'shopping-cart' => 'shopping-cart',
-        'briefcase' => 'briefcase',
-        'heartbeat' => 'heart',
-        'home' => 'home',
-        'rocket' => 'rocket',
-        'heart' => 'heart',
-        'graduation-cap' => 'book',
-        'palette' => 'image',
-        'cog' => 'settings',
-    );
-    return $icon_map[$icon] ?? 'circle';
-}
-
-// Make function available
-if (!function_exists('get_industry_icon')) {
-    function get_industry_icon($icon) {
-        $icon_map = array(
-            'utensils' => 'coffee',
-            'shopping-cart' => 'shopping-cart',
-            'briefcase' => 'briefcase',
-            'heartbeat' => 'heart',
-            'home' => 'home',
-            'rocket' => 'rocket',
-            'heart' => 'heart',
-            'graduation-cap' => 'book',
-            'palette' => 'image',
-            'cog' => 'settings',
-        );
-        return $icon_map[$icon] ?? 'circle';
-    }
-}
-?>
