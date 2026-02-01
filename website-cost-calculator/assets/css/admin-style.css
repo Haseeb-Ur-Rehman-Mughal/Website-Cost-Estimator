@@ -1,0 +1,279 @@
+/**
+ * Website Cost Calculator Pro - Admin Styles
+ * Author: Haseeb Ur Rehman Mughal
+ * Website: https://ezyontech.com
+ */
+
+/* Admin Wrap */
+.wcc-admin-wrap {
+    max-width: 1200px;
+    margin-right: 20px;
+}
+
+.wcc-admin-header {
+    background: #fff;
+    padding: 20px;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.wcc-admin-header p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.wcc-admin-header code {
+    background: #f0f0f1;
+    padding: 4px 8px;
+    border-radius: 3px;
+    font-size: 13px;
+}
+
+/* Tab Navigation */
+.wcc-admin-tabs {
+    margin-top: 20px;
+}
+
+.wcc-admin-tabs .nav-tab-wrapper {
+    margin-bottom: 0;
+}
+
+.wcc-tab-content {
+    display: none;
+    background: #fff;
+    padding: 25px;
+    border: 1px solid #c3c4c7;
+    border-top: none;
+}
+
+.wcc-tab-content.active {
+    display: block;
+}
+
+.wcc-tab-content h2 {
+    margin-top: 0;
+    padding-top: 0;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+}
+
+.wcc-tab-content h2:not(:first-child) {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* Repeater Fields */
+.wcc-repeater {
+    margin-bottom: 15px;
+}
+
+.wcc-repeater-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #ddd;
+}
+
+.wcc-repeater-item:last-child {
+    border-bottom: none;
+}
+
+.wcc-repeater-item input.regular-text {
+    flex: 1;
+    max-width: 350px;
+}
+
+.wcc-repeater-item input.small-text {
+    width: 100px !important;
+}
+
+.wcc-add-item {
+    margin-top: 10px;
+}
+
+.wcc-remove-item {
+    color: #b32d2e;
+    border-color: #b32d2e;
+}
+
+.wcc-remove-item:hover {
+    background: #b32d2e;
+    color: #fff;
+    border-color: #b32d2e;
+}
+
+/* Form Table */
+.wcc-tab-content .form-table th {
+    width: 200px;
+}
+
+.wcc-tab-content .form-table input[type="color"] {
+    width: 80px;
+    height: 36px;
+    padding: 2px;
+    cursor: pointer;
+}
+
+/* Quotes Page */
+.wcc-quotes-wrap .subsubsub {
+    margin-bottom: 15px;
+}
+
+.wcc-quotes-table {
+    margin-top: 15px;
+}
+
+.wcc-quotes-table .column-name {
+    width: 15%;
+}
+
+.wcc-quotes-table .column-email {
+    width: 18%;
+}
+
+.wcc-quotes-table .column-company {
+    width: 12%;
+}
+
+.wcc-quotes-table .column-total {
+    width: 12%;
+}
+
+.wcc-quotes-table .column-date {
+    width: 15%;
+}
+
+.wcc-quotes-table .column-status {
+    width: 10%;
+}
+
+.wcc-quotes-table .column-actions {
+    width: 8%;
+}
+
+/* Status Badges */
+.wcc-status {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+.wcc-status-pending {
+    background: #FEF3C7;
+    color: #D97706;
+}
+
+.wcc-status-contacted {
+    background: #DBEAFE;
+    color: #2563EB;
+}
+
+.wcc-status-converted {
+    background: #D1FAE5;
+    color: #059669;
+}
+
+.wcc-status-closed {
+    background: #F3F4F6;
+    color: #6B7280;
+}
+
+/* Quote Details */
+.wcc-quote-details {
+    background: #f9f9f9;
+}
+
+.wcc-quote-details-inner {
+    padding: 20px;
+}
+
+.wcc-quote-details-inner h4 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1d2327;
+}
+
+.wcc-quote-selections {
+    margin-bottom: 15px;
+}
+
+.wcc-quote-selections pre {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    white-space: pre-wrap;
+    font-size: 13px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.wcc-quote-notes {
+    margin-bottom: 15px;
+}
+
+.wcc-quote-notes p {
+    background: #fff;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 10px 0 0;
+}
+
+.wcc-quote-actions {
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.wcc-quote-actions select {
+    margin-right: 5px;
+}
+
+/* Responsive */
+@media screen and (max-width: 782px) {
+    .wcc-repeater-item {
+        flex-wrap: wrap;
+    }
+
+    .wcc-repeater-item input.regular-text {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .wcc-quotes-table .column-company,
+    .wcc-quotes-table .column-date {
+        display: none;
+    }
+}
+
+/* Settings Form Submit */
+.wcc-settings-form .submit {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+.wcc-settings-form .submit input[type="submit"] {
+    margin-right: 10px;
+}
+
+/* Description Text */
+.wcc-tab-content .description {
+    color: #666;
+    font-size: 13px;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* Horizontal Rule */
+.wcc-tab-content hr {
+    margin: 30px 0;
+    border: none;
+    border-top: 1px solid #ddd;
+}
