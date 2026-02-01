@@ -251,7 +251,12 @@ website-cost-calculator/
 
 ## License
 
-GPL v2 or later
+**Proprietary Software** - Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech
+
+All rights reserved. This software is proprietary and confidential.
+Unauthorized copying, modification, distribution, or use is strictly prohibited.
+
+For licensing inquiries: [ezyontech.com](https://ezyontech.com)
 
 ## Changelog
 

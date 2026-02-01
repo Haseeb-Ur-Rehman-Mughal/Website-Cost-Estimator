@@ -1,12 +1,15 @@
-=== Website Cost Calculator ===
-Contributors: yourname
-Tags: calculator, cost calculator, quote, pricing, web development, estimate
+=== Website Cost Calculator Pro ===
+Contributors: Haseeb Ur Rehman Mughal
+Tags: calculator, cost calculator, quote, pricing, web development, estimate, website cost, project estimator
 Requires at least: 5.0
 Tested up to: 6.4
-Stable tag: 1.0.0
+Stable tag: 2.0.0
 Requires PHP: 7.4
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: Proprietary
+Author: Haseeb Ur Rehman Mughal
+Author URI: https://ezyontech.com
+
+Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech. All rights reserved.
 
 A comprehensive website cost calculator that helps clients estimate website project costs with a beautiful, multi-step interface.
 

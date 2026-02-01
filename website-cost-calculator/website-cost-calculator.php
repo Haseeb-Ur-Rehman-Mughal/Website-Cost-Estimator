@@ -6,10 +6,17 @@
  * Version: 2.0.0
  * Author: Haseeb Ur Rehman Mughal
  * Author URI: https://ezyontech.com
- * License: GPL v2 or later
- * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * License: Proprietary
  * Text Domain: website-cost-calculator
  * Domain Path: /languages
+ * 
+ * Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech
+ * All rights reserved.
+ * 
+ * This plugin is proprietary software. Unauthorized copying, modification,
+ * distribution, or use of this software is strictly prohibited.
+ * 
+ * For licensing inquiries: https://ezyontech.com
  */
 
 // Prevent direct access
