@@ -10,7 +10,7 @@
  * Text Domain: website-cost-calculator
  * Domain Path: /languages
  * 
- * Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech
+ * Copyright (C) 2026 Haseeb Ur Rehman Mughal / EzyOnTech
  * All rights reserved.
  * 
  * This plugin is proprietary software. Unauthorized copying, modification,

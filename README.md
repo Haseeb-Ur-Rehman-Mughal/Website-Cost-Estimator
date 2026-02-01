@@ -251,7 +251,7 @@ website-cost-calculator/
 
 ## License
 
-**Proprietary Software** - Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech
+**Proprietary Software** - Copyright (C) 2026 Haseeb Ur Rehman Mughal / EzyOnTech
 
 All rights reserved. This software is proprietary and confidential.
 Unauthorized copying, modification, distribution, or use is strictly prohibited.

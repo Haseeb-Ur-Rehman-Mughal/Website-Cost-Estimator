@@ -9,7 +9,7 @@ License: Proprietary
 Author: Haseeb Ur Rehman Mughal
 Author URI: https://ezyontech.com
 
-Copyright (C) 2024 Haseeb Ur Rehman Mughal / EzyOnTech. All rights reserved.
+Copyright (C) 2026 Haseeb Ur Rehman Mughal / EzyOnTech. All rights reserved.
 
 A comprehensive website cost calculator that helps clients estimate website project costs with a beautiful, multi-step interface.
 
