@@ -1571,12 +1571,12 @@
     box-shadow: var(--wcc-shadow);
 }
 
-/* Floating Widget */
+/* Floating Widget - Top Right */
 .wcc-floating-widget {
     position: fixed;
-    bottom: 24px;
+    top: 100px;
     right: 24px;
-    background: var(--wcc-text);
+    background: linear-gradient(135deg, var(--wcc-gradient-start), var(--wcc-gradient-end));
     color: white;
     padding: 16px 20px;
     border-radius: var(--wcc-radius);
@@ -1585,17 +1585,17 @@
     align-items: center;
     gap: 16px;
     z-index: 1000;
-    animation: slideUp 0.4s ease;
+    animation: slideIn 0.4s ease;
 }
 
-@keyframes slideUp {
+@keyframes slideIn {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateX(30px);
     }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
     }
 }
 
@@ -1924,9 +1924,9 @@
     }
     
     .wcc-floating-widget {
-        left: 16px;
+        top: 80px;
+        left: auto;
         right: 16px;
-        bottom: 16px;
         justify-content: center;
     }
     
