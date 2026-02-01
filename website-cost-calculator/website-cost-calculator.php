@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Website Cost Calculator Pro
- * Plugin URI: https://example.com/website-cost-calculator
+ * Plugin URI: https://ezyontech.com/website-cost-calculator
  * Description: The most comprehensive website cost calculator tool for WordPress. Features multi-step wizard, PDF quotes, industry presets, cost breakdown charts, and beautiful modern UI.
  * Version: 2.0.0
- * Author: Your Name
- * Author URI: https://example.com
+ * Author: Haseeb Ur Rehman Mughal
+ * Author URI: https://ezyontech.com
  * License: GPL v2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: website-cost-calculator
@@ -307,6 +307,9 @@ class Website_Cost_Calculator {
         add_action('admin_init', array($this, 'register_settings'));
         add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
         
+        // Add settings link on plugins page
+        add_filter('plugin_action_links_' . WCC_PLUGIN_BASENAME, array($this, 'add_settings_link'));
+        
         // Frontend hooks
         add_action('wp_enqueue_scripts', array($this, 'frontend_enqueue_scripts'));
         
@@ -322,6 +325,15 @@ class Website_Cost_Calculator {
         add_action('wp_ajax_nopriv_wcc_save_quote', array($this, 'handle_save_quote'));
         add_action('wp_ajax_wcc_load_quote', array($this, 'handle_load_quote'));
         add_action('wp_ajax_nopriv_wcc_load_quote', array($this, 'handle_load_quote'));
+    }
+    
+    /**
+     * Add settings link on plugins page
+     */
+    public function add_settings_link($links) {
+        $settings_link = '<a href="' . admin_url('admin.php?page=website-cost-calculator') . '">' . __('Settings', 'website-cost-calculator') . '</a>';
+        array_unshift($links, $settings_link);
+        return $links;
     }
     
     /**

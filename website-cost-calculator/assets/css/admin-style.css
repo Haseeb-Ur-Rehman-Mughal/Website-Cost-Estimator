@@ -1,10 +1,13 @@
 /**
- * Website Cost Calculator - Admin Styles
+ * Website Cost Calculator Pro - Admin Styles
+ * Author: Haseeb Ur Rehman Mughal
+ * Website: https://ezyontech.com
  */
 
 /* Admin Wrap */
 .wcc-admin-wrap {
     max-width: 1200px;
+    margin-right: 20px;
 }
 
 .wcc-admin-header {

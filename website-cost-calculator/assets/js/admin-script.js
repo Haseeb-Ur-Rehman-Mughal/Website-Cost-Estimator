@@ -1,5 +1,7 @@
 /**
- * Website Cost Calculator - Admin JavaScript
+ * Website Cost Calculator Pro - Admin JavaScript
+ * Author: Haseeb Ur Rehman Mughal
+ * Website: https://ezyontech.com
  */
 
 (function($) {
@@ -13,12 +15,15 @@
             this.initTabs();
             this.initRepeaters();
             this.initQuoteDetails();
+            this.initFormValidation();
         },
 
         /**
          * Initialize tab navigation
          */
         initTabs: function() {
+            const self = this;
+            
             $('.nav-tab').on('click', function(e) {
                 e.preventDefault();
                 
@@ -32,8 +37,12 @@
                 $('.wcc-tab-content').removeClass('active');
                 $('#' + tabId).addClass('active');
                 
-                // Update URL hash
-                window.location.hash = tabId;
+                // Update URL hash without scrolling
+                if (history.pushState) {
+                    history.pushState(null, null, '#' + tabId);
+                } else {
+                    window.location.hash = tabId;
+                }
             });
 
             // Check for hash on load
@@ -53,40 +62,56 @@
             const self = this;
 
             // Add item button
-            $('.wcc-add-item').on('click', function() {
+            $(document).on('click', '.wcc-add-item', function() {
                 const targetId = $(this).data('target');
                 const fieldName = $(this).data('name');
-                const isMultiplier = $(this).data('field') === 'multiplier';
+                const fieldType = $(this).data('field') || 'price';
                 
-                self.addRepeaterItem(targetId, fieldName, isMultiplier);
+                self.addRepeaterItem(targetId, fieldName, fieldType);
             });
 
             // Remove item button (delegated)
             $(document).on('click', '.wcc-remove-item', function() {
                 const $item = $(this).closest('.wcc-repeater-item');
+                const $container = $item.closest('.wcc-repeater');
                 
-                // Animate removal
-                $item.slideUp(200, function() {
-                    $(this).remove();
-                });
+                // Don't remove if it's the last item
+                if ($container.find('.wcc-repeater-item').length > 1) {
+                    $item.slideUp(200, function() {
+                        $(this).remove();
+                        // Re-index the remaining items
+                        self.reindexRepeater($container);
+                    });
+                } else {
+                    alert('You must have at least one item.');
+                }
             });
         },
 
         /**
          * Add a new repeater item
          */
-        addRepeaterItem: function(targetId, fieldName, isMultiplier) {
+        addRepeaterItem: function(targetId, fieldName, fieldType) {
             const $container = $('#' + targetId);
-            const index = $container.find('.wcc-repeater-item').length;
+            const index = Date.now(); // Use timestamp for unique index
             
-            let secondField = isMultiplier 
-                ? `<input type="number" name="${fieldName}[${index}][multiplier]" value="1" placeholder="Multiplier" class="small-text" step="0.01" min="1">`
-                : `<input type="number" name="${fieldName}[${index}][price]" value="" placeholder="Price" class="small-text" step="0.01">`;
+            let secondFieldName = 'price';
+            let secondFieldPlaceholder = 'Price';
+            let secondFieldMin = '0';
+            
+            if (fieldType === 'multiplier') {
+                secondFieldName = 'multiplier';
+                secondFieldPlaceholder = 'Multiplier';
+                secondFieldMin = '0';
+            } else if (fieldType === 'monthly') {
+                secondFieldName = 'monthly';
+                secondFieldPlaceholder = 'Monthly Price';
+            }
 
             const $newItem = $(`
                 <div class="wcc-repeater-item" style="display: none;">
                     <input type="text" name="${fieldName}[${index}][name]" value="" placeholder="Name" class="regular-text">
-                    ${secondField}
+                    <input type="number" name="${fieldName}[${index}][${secondFieldName}]" value="" placeholder="${secondFieldPlaceholder}" class="small-text" step="0.01" min="${secondFieldMin}">
                     <button type="button" class="button wcc-remove-item">Remove</button>
                 </div>
             `);
@@ -99,10 +124,25 @@
         },
 
         /**
+         * Re-index repeater items after removal
+         */
+        reindexRepeater: function($container) {
+            $container.find('.wcc-repeater-item').each(function(index) {
+                $(this).find('input, select, textarea').each(function() {
+                    const name = $(this).attr('name');
+                    if (name) {
+                        const newName = name.replace(/\[\d+\]/, '[' + index + ']');
+                        $(this).attr('name', newName);
+                    }
+                });
+            });
+        },
+
+        /**
          * Initialize quote details toggle
          */
         initQuoteDetails: function() {
-            $('.wcc-view-details').on('click', function() {
+            $(document).on('click', '.wcc-view-details', function() {
                 const quoteId = $(this).data('quote-id');
                 const $details = $('#quote-details-' + quoteId);
                 
@@ -119,6 +159,17 @@
                     $details.slideDown(200);
                     $(this).text('Hide');
                 }
+            });
+        },
+
+        /**
+         * Initialize form validation
+         */
+        initFormValidation: function() {
+            $('#wcc-settings-form').on('submit', function(e) {
+                // Basic validation could be added here
+                // For now, just let the form submit
+                return true;
             });
         }
     };
