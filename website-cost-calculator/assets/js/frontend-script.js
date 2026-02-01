@@ -771,6 +771,30 @@
             const $btnText = $submitBtn.find('.wcc-btn-text');
             const $btnLoading = $submitBtn.find('.wcc-btn-loading');
 
+            // Validate required fields
+            const name = $('#wcc-name').val().trim();
+            const email = $('#wcc-email').val().trim();
+            
+            if (!name) {
+                self.showNotification('Please enter your name.', 'error');
+                $('#wcc-name').focus();
+                return;
+            }
+            
+            if (!email) {
+                self.showNotification('Please enter your email address.', 'error');
+                $('#wcc-email').focus();
+                return;
+            }
+            
+            // Basic email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                self.showNotification('Please enter a valid email address.', 'error');
+                $('#wcc-email').focus();
+                return;
+            }
+
             $submitBtn.prop('disabled', true);
             $btnText.hide();
             $btnLoading.show();
@@ -778,12 +802,12 @@
             const formData = {
                 action: 'wcc_submit_quote',
                 nonce: wccFrontend.nonce,
-                name: $('#wcc-name').val(),
-                email: $('#wcc-email').val(),
-                phone: $('#wcc-phone').val(),
-                company: $('#wcc-company').val(),
-                industry: this.selections.industry?.name || '',
-                notes: $('#wcc-notes').val(),
+                name: name,
+                email: email,
+                phone: $('#wcc-phone').val() || '',
+                company: $('#wcc-company').val() || '',
+                industry: this.selections.industry ? this.selections.industry.name : '',
+                notes: $('#wcc-notes').val() || '',
                 selections: this.getSelectionsText(),
                 breakdown: JSON.stringify(this.costs),
                 subtotal: this.subtotal || 0,
@@ -796,20 +820,24 @@
                 type: 'POST',
                 data: formData,
                 success: function(response) {
-                    if (response.success) {
+                    if (response && response.success) {
                         $form.hide();
-                        $('#wcc-success-message').text(response.data.message);
+                        $('#wcc-success-message').text(response.data.message || 'Quote submitted successfully!');
                         $('#wcc-form-success').fadeIn(300);
                         self.initFeatherIcons();
                     } else {
-                        self.showNotification(response.data.message || 'An error occurred.', 'error');
+                        const errorMsg = (response && response.data && response.data.message) 
+                            ? response.data.message 
+                            : 'Failed to submit quote. Please try again.';
+                        self.showNotification(errorMsg, 'error');
                         $submitBtn.prop('disabled', false);
                         $btnText.show();
                         $btnLoading.hide();
                     }
                 },
-                error: function() {
-                    self.showNotification('An error occurred. Please try again.', 'error');
+                error: function(xhr, status, error) {
+                    console.error('Quote submission error:', status, error);
+                    self.showNotification('Connection error. Please check your internet and try again.', 'error');
                     $submitBtn.prop('disabled', false);
                     $btnText.show();
                     $btnLoading.hide();
@@ -852,16 +880,26 @@
          */
         saveQuote: function() {
             const self = this;
+            
+            // Check if there are any selections
+            if (!this.selections.websiteType) {
+                self.showNotification('Please make some selections before saving.', 'error');
+                return;
+            }
+            
             const quoteData = JSON.stringify({
                 selections: this.selections,
                 costs: this.costs,
                 monthly: this.monthly,
                 totals: {
-                    subtotal: this.subtotal,
-                    grandTotal: this.grandTotal,
-                    monthlyTotal: this.monthlyTotal
+                    subtotal: this.subtotal || 0,
+                    grandTotal: this.grandTotal || 0,
+                    monthlyTotal: this.monthlyTotal || 0
                 }
             });
+
+            // Show loading state
+            self.showNotification('Saving your quote...', 'info');
 
             $.ajax({
                 url: wccFrontend.ajaxUrl,
@@ -872,13 +910,21 @@
                     quote_data: quoteData
                 },
                 success: function(response) {
-                    if (response.success) {
+                    if (response && response.success) {
+                        $('.wcc-notification').remove();
                         $('#wcc-saved-code').text(response.data.quote_code);
                         $('#wcc-save-modal').addClass('active');
                         self.initFeatherIcons();
                     } else {
-                        self.showNotification('Failed to save quote.', 'error');
+                        const errorMsg = (response && response.data && response.data.message) 
+                            ? response.data.message 
+                            : 'Failed to save quote. Please try again.';
+                        self.showNotification(errorMsg, 'error');
                     }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Save quote error:', status, error);
+                    self.showNotification('Connection error. Please try again.', 'error');
                 }
             });
         },

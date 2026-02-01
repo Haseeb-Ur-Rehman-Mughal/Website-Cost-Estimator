@@ -1964,15 +1964,19 @@
         box-shadow: none;
         margin: 0;
         border-radius: 0;
+        background: white;
     }
     
+    /* Hide everything except summary */
     .wcc-header,
     .wcc-progress-wrapper,
     .wcc-navigation,
     .wcc-floating-widget,
     .wcc-summary-actions,
     .wcc-summary-sidebar,
-    .wcc-header-actions {
+    .wcc-header-actions,
+    .wcc-contact-card,
+    .wcc-modal {
         display: none !important;
     }
     
@@ -1980,12 +1984,41 @@
         padding: 20px;
     }
     
+    /* Hide all steps */
     .wcc-step {
+        display: none !important;
+    }
+    
+    /* Only show the summary step (step 6) */
+    .wcc-step#wcc-step-6,
+    #wcc-step-6 {
         display: block !important;
     }
     
     .wcc-summary-layout {
         grid-template-columns: 1fr;
+    }
+    
+    .wcc-summary-main {
+        width: 100%;
+    }
+    
+    .wcc-price-comparison {
+        margin-bottom: 20px;
+    }
+    
+    .wcc-breakdown-section,
+    .wcc-detailed-summary {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .wcc-step-header {
+        margin-bottom: 20px;
+    }
+    
+    .wcc-chart-container {
+        max-height: 200px;
     }
 }
 
