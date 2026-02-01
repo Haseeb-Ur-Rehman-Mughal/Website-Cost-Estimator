@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - The Future of Digital Excellence</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <span class="logo-icon">
+                    <i class="fas fa-cube"></i>
+                </span>
+                <span class="logo-text">Nexus</span>
+            </a>
+            
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#showcase">Showcase</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                    <i class="fas fa-sun"></i>
+                </button>
+                <a href="#" class="btn btn-ghost">Sign In</a>
+                <a href="#" class="btn btn-primary">Get Started</a>
+            </div>
+            
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#showcase">Showcase</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#" class="btn btn-primary">Get Started</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="gradient-orb orb-3"></div>
+            <div class="grid-overlay"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge animate-fade-in">
+                <span class="badge-dot"></span>
+                <span>Introducing Nexus 2.0 - Now with AI</span>
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <h1 class="hero-title animate-fade-in-up">
+                Build the future<br>
+                <span class="gradient-text">without limits</span>
+            </h1>
+            
+            <p class="hero-description animate-fade-in-up delay-1">
+                The all-in-one platform that combines the power of AI with beautiful design. 
+                Create, collaborate, and ship products faster than ever before.
+            </p>
+            
+            <div class="hero-cta animate-fade-in-up delay-2">
+                <a href="#" class="btn btn-primary btn-lg">
+                    Start for free
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-play-circle"></i>
+                    Watch demo
+                </a>
+            </div>
+            
+            <div class="hero-stats animate-fade-in-up delay-3">
+                <div class="stat">
+                    <span class="stat-number" data-count="50">0</span><span class="stat-suffix">K+</span>
+                    <span class="stat-label">Active Users</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="99">0</span><span class="stat-suffix">%</span>
+                    <span class="stat-label">Uptime SLA</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number" data-count="4.9">0</span><span class="stat-suffix">/5</span>
+                    <span class="stat-label">User Rating</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-visual animate-fade-in-up delay-2">
+            <div class="browser-mockup">
+                <div class="browser-header">
+                    <div class="browser-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="browser-address">
+                        <i class="fas fa-lock"></i>
+                        <span>nexus.app/dashboard</span>
+                    </div>
+                </div>
+                <div class="browser-content">
+                    <div class="dashboard-preview">
+                        <div class="dashboard-sidebar">
+                            <div class="sidebar-item active"><i class="fas fa-home"></i></div>
+                            <div class="sidebar-item"><i class="fas fa-chart-bar"></i></div>
+                            <div class="sidebar-item"><i class="fas fa-users"></i></div>
+                            <div class="sidebar-item"><i class="fas fa-cog"></i></div>
+                        </div>
+                        <div class="dashboard-main">
+                            <div class="dashboard-header">
+                                <div class="dash-title"></div>
+                                <div class="dash-actions">
+                                    <div class="dash-btn"></div>
+                                    <div class="dash-btn primary"></div>
+                                </div>
+                            </div>
+                            <div class="dashboard-cards">
+                                <div class="dash-card">
+                                    <div class="card-icon"><i class="fas fa-dollar-sign"></i></div>
+                                    <div class="card-info">
+                                        <div class="card-label"></div>
+                                        <div class="card-value"></div>
+                                    </div>
+                                </div>
+                                <div class="dash-card">
+                                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                                    <div class="card-info">
+                                        <div class="card-label"></div>
+                                        <div class="card-value"></div>
+                                    </div>
+                                </div>
+                                <div class="dash-card">
+                                    <div class="card-icon"><i class="fas fa-shopping-cart"></i></div>
+                                    <div class="card-info">
+                                        <div class="card-label"></div>
+                                        <div class="card-value"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dashboard-chart">
+                                <div class="chart-bars">
+                                    <div class="bar" style="height: 60%"></div>
+                                    <div class="bar" style="height: 80%"></div>
+                                    <div class="bar" style="height: 45%"></div>
+                                    <div class="bar" style="height: 90%"></div>
+                                    <div class="bar" style="height: 70%"></div>
+                                    <div class="bar" style="height: 85%"></div>
+                                    <div class="bar" style="height: 55%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Section -->
+    <section class="logos-section">
+        <div class="container">
+            <p class="logos-label">Trusted by teams at</p>
+            <div class="logos-grid">
+                <div class="logo-item">
+                    <i class="fab fa-google"></i>
+                    <span>Google</span>
+                </div>
+                <div class="logo-item">
+                    <i class="fab fa-microsoft"></i>
+                    <span>Microsoft</span>
+                </div>
+                <div class="logo-item">
+                    <i class="fab fa-apple"></i>
+                    <span>Apple</span>
+                </div>
+                <div class="logo-item">
+                    <i class="fab fa-amazon"></i>
+                    <span>Amazon</span>
+                </div>
+                <div class="logo-item">
+                    <i class="fab fa-meta"></i>
+                    <span>Meta</span>
+                </div>
+                <div class="logo-item">
+                    <i class="fab fa-spotify"></i>
+                    <span>Spotify</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Features</span>
+                <h2 class="section-title">Everything you need to <span class="gradient-text">succeed</span></h2>
+                <p class="section-description">
+                    Powerful features designed to help you build, scale, and grow your business with confidence.
+                </p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card featured">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Built for speed with edge computing and global CDN. Your content loads in milliseconds, anywhere in the world.</p>
+                    <div class="feature-visual">
+                        <div class="speed-meter">
+                            <div class="speed-fill"></div>
+                            <span>99ms</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Enterprise Security</h3>
+                    <p>Bank-grade encryption, SOC 2 compliance, and advanced threat protection keep your data safe.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h3>AI-Powered</h3>
+                    <p>Intelligent automation that learns from your workflow and suggests improvements automatically.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Version Control</h3>
+                    <p>Built-in versioning with instant rollback. Never lose your work with automatic backups.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-gear"></i>
+                    </div>
+                    <h3>Team Collaboration</h3>
+                    <p>Real-time collaboration with presence indicators, comments, and instant sync across devices.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>500+ Integrations</h3>
+                    <p>Connect with your favorite tools. Slack, GitHub, Figma, and hundreds more out of the box.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase" id="showcase">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Showcase</span>
+                <h2 class="section-title">See what's <span class="gradient-text">possible</span></h2>
+                <p class="section-description">
+                    Explore how leading companies are using Nexus to transform their digital presence.
+                </p>
+            </div>
+            
+            <div class="showcase-tabs">
+                <button class="tab-btn active" data-tab="design">Design</button>
+                <button class="tab-btn" data-tab="develop">Develop</button>
+                <button class="tab-btn" data-tab="deploy">Deploy</button>
+            </div>
+            
+            <div class="showcase-content">
+                <div class="showcase-panel active" id="design">
+                    <div class="showcase-info">
+                        <h3>Design without constraints</h3>
+                        <p>Our intuitive design tools let you create stunning interfaces with pixel-perfect precision. From wireframes to high-fidelity prototypes, bring your vision to life.</p>
+                        <ul class="showcase-list">
+                            <li><i class="fas fa-check"></i> Drag-and-drop interface builder</li>
+                            <li><i class="fas fa-check"></i> 1000+ pre-built components</li>
+                            <li><i class="fas fa-check"></i> Advanced animation timeline</li>
+                            <li><i class="fas fa-check"></i> Responsive design tools</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Explore Design Tools</a>
+                    </div>
+                    <div class="showcase-visual">
+                        <div class="design-preview">
+                            <div class="design-canvas">
+                                <div class="design-element el-1"></div>
+                                <div class="design-element el-2"></div>
+                                <div class="design-element el-3"></div>
+                                <div class="design-toolbar">
+                                    <span><i class="fas fa-mouse-pointer"></i></span>
+                                    <span><i class="fas fa-square"></i></span>
+                                    <span><i class="fas fa-circle"></i></span>
+                                    <span><i class="fas fa-font"></i></span>
+                                    <span><i class="fas fa-image"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="showcase-panel" id="develop">
+                    <div class="showcase-info">
+                        <h3>Code with confidence</h3>
+                        <p>Write clean, maintainable code with our powerful development environment. AI-assisted coding, instant previews, and seamless Git integration.</p>
+                        <ul class="showcase-list">
+                            <li><i class="fas fa-check"></i> AI code completion</li>
+                            <li><i class="fas fa-check"></i> Real-time collaboration</li>
+                            <li><i class="fas fa-check"></i> Integrated debugging tools</li>
+                            <li><i class="fas fa-check"></i> One-click Git operations</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Explore Dev Tools</a>
+                    </div>
+                    <div class="showcase-visual">
+                        <div class="code-preview">
+                            <div class="code-header">
+                                <span class="code-tab active">App.tsx</span>
+                                <span class="code-tab">styles.css</span>
+                            </div>
+                            <pre class="code-content">
+<span class="code-keyword">import</span> { useState } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;
+
+<span class="code-keyword">export default function</span> <span class="code-function">App</span>() {
+  <span class="code-keyword">const</span> [count, setCount] = <span class="code-function">useState</span>(<span class="code-number">0</span>);
+
+  <span class="code-keyword">return</span> (
+    <span class="code-tag">&lt;div</span> <span class="code-attr">className</span>=<span class="code-string">"app"</span><span class="code-tag">&gt;</span>
+      <span class="code-tag">&lt;h1&gt;</span>Count: {count}<span class="code-tag">&lt;/h1&gt;</span>
+      <span class="code-tag">&lt;button</span> <span class="code-attr">onClick</span>={() => <span class="code-function">setCount</span>(c => c + 1)}<span class="code-tag">&gt;</span>
+        Increment
+      <span class="code-tag">&lt;/button&gt;</span>
+    <span class="code-tag">&lt;/div&gt;</span>
+  );
+}</pre>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="showcase-panel" id="deploy">
+                    <div class="showcase-info">
+                        <h3>Deploy in seconds</h3>
+                        <p>Push to production with one click. Automatic builds, global edge network, and zero-downtime deployments make shipping a breeze.</p>
+                        <ul class="showcase-list">
+                            <li><i class="fas fa-check"></i> Instant global deployment</li>
+                            <li><i class="fas fa-check"></i> Automatic SSL certificates</li>
+                            <li><i class="fas fa-check"></i> Built-in CI/CD pipeline</li>
+                            <li><i class="fas fa-check"></i> Real-time analytics</li>
+                        </ul>
+                        <a href="#" class="btn btn-primary">Explore Deployment</a>
+                    </div>
+                    <div class="showcase-visual">
+                        <div class="deploy-preview">
+                            <div class="deploy-status">
+                                <div class="deploy-step completed">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Build</span>
+                                </div>
+                                <div class="deploy-line completed"></div>
+                                <div class="deploy-step completed">
+                                    <i class="fas fa-check-circle"></i>
+                                    <span>Test</span>
+                                </div>
+                                <div class="deploy-line active"></div>
+                                <div class="deploy-step active">
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <span>Deploy</span>
+                                </div>
+                                <div class="deploy-line"></div>
+                                <div class="deploy-step">
+                                    <i class="fas fa-circle"></i>
+                                    <span>Live</span>
+                                </div>
+                            </div>
+                            <div class="deploy-globe">
+                                <div class="globe-ring"></div>
+                                <div class="globe-ring"></div>
+                                <div class="globe-ring"></div>
+                                <div class="globe-dot" style="top: 20%; left: 30%"></div>
+                                <div class="globe-dot" style="top: 40%; left: 70%"></div>
+                                <div class="globe-dot" style="top: 60%; left: 20%"></div>
+                                <div class="globe-dot" style="top: 30%; left: 80%"></div>
+                                <div class="globe-dot" style="top: 70%; left: 50%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">Loved by <span class="gradient-text">thousands</span></h2>
+                <p class="section-description">
+                    See what our customers have to say about their experience with Nexus.
+                </p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"Nexus transformed how our team works. We shipped our new product 3x faster than before. The AI features are genuinely game-changing."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #6366f1, #8b5cf6)">
+                            <span>SK</span>
+                        </div>
+                        <div class="author-info">
+                            <span class="author-name">Sarah Kim</span>
+                            <span class="author-role">CTO at TechFlow</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card featured">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"I've tried every tool out there. Nexus is simply the best. The performance, the design, the attention to detail - it's unmatched. Our conversion rate increased by 150% after migrating."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444)">
+                            <span>MR</span>
+                        </div>
+                        <div class="author-info">
+                            <span class="author-name">Marcus Rodriguez</span>
+                            <span class="author-role">Founder at LaunchPad</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">"The collaboration features are incredible. My remote team feels like we're in the same room. Can't imagine going back to our old workflow."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar" style="background: linear-gradient(135deg, #10b981, #06b6d4)">
+                            <span>EW</span>
+                        </div>
+                        <div class="author-info">
+                            <span class="author-name">Emily Watson</span>
+                            <span class="author-role">Design Lead at Artistry</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pricing</span>
+                <h2 class="section-title">Simple, transparent <span class="gradient-text">pricing</span></h2>
+                <p class="section-description">
+                    Choose the plan that works for you. All plans include a 14-day free trial.
+                </p>
+            </div>
+            
+            <div class="pricing-toggle">
+                <span class="toggle-label active" data-period="monthly">Monthly</span>
+                <button class="toggle-switch" id="pricingToggle">
+                    <span class="toggle-slider"></span>
+                </button>
+                <span class="toggle-label" data-period="yearly">Yearly <span class="save-badge">Save 20%</span></span>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <p>Perfect for individuals and small projects</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-monthly="0" data-yearly="0">0</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Up to 3 projects</li>
+                        <li><i class="fas fa-check"></i> Basic analytics</li>
+                        <li><i class="fas fa-check"></i> 1 team member</li>
+                        <li><i class="fas fa-check"></i> Community support</li>
+                        <li class="disabled"><i class="fas fa-times"></i> Custom domains</li>
+                        <li class="disabled"><i class="fas fa-times"></i> AI features</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary btn-block">Get Started</a>
+                </div>
+                
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="pricing-header">
+                        <h3>Pro</h3>
+                        <p>For growing teams and businesses</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-monthly="29" data-yearly="23">29</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Unlimited projects</li>
+                        <li><i class="fas fa-check"></i> Advanced analytics</li>
+                        <li><i class="fas fa-check"></i> Up to 10 team members</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Custom domains</li>
+                        <li><i class="fas fa-check"></i> AI features included</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-block">Start Free Trial</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Enterprise</h3>
+                        <p>For large organizations with custom needs</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="currency">$</span>
+                        <span class="amount" data-monthly="99" data-yearly="79">99</span>
+                        <span class="period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Everything in Pro</li>
+                        <li><i class="fas fa-check"></i> Unlimited team members</li>
+                        <li><i class="fas fa-check"></i> SSO & SAML</li>
+                        <li><i class="fas fa-check"></i> Dedicated support</li>
+                        <li><i class="fas fa-check"></i> Custom integrations</li>
+                        <li><i class="fas fa-check"></i> SLA guarantee</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary btn-block">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="cta-bg">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+        </div>
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to get started?</h2>
+                <p>Join thousands of teams already using Nexus to build the future.</p>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-white btn-lg">
+                        Start for free
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-ghost-white btn-lg">
+                        Talk to sales
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <span class="logo-icon">
+                            <i class="fas fa-cube"></i>
+                        </span>
+                        <span class="logo-text">Nexus</span>
+                    </a>
+                    <p>Building the future of digital experiences, one pixel at a time.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Documentation</a></li>
+                        <li><a href="#">API Reference</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Nexus. All rights reserved.</p>
+                <div class="footer-badges">
+                    <span><i class="fas fa-shield-halved"></i> SOC 2 Certified</span>
+                    <span><i class="fas fa-lock"></i> GDPR Compliant</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
