@@ -309,6 +309,9 @@ class Website_Cost_Calculator {
         register_activation_hook(__FILE__, array($this, 'activate'));
         register_deactivation_hook(__FILE__, array($this, 'deactivate'));
         
+        // Check and create tables on init (in case plugin was updated without reactivation)
+        add_action('init', array($this, 'maybe_create_tables'));
+        
         // Admin hooks
         add_action('admin_menu', array($this, 'add_admin_menu'));
         add_action('admin_init', array($this, 'register_settings'));
@@ -420,6 +423,28 @@ class Website_Cost_Calculator {
      */
     public function deactivate() {
         flush_rewrite_rules();
+    }
+    
+    /**
+     * Check and create tables if they don't exist
+     */
+    public function maybe_create_tables() {
+        global $wpdb;
+        
+        // Check if tables exist
+        $quotes_table = $wpdb->prefix . 'wcc_quotes';
+        $saved_quotes_table = $wpdb->prefix . 'wcc_saved_quotes';
+        
+        $quotes_exists = $wpdb->get_var("SHOW TABLES LIKE '$quotes_table'") === $quotes_table;
+        $saved_exists = $wpdb->get_var("SHOW TABLES LIKE '$saved_quotes_table'") === $saved_quotes_table;
+        
+        if (!$quotes_exists) {
+            $this->create_quotes_table();
+        }
+        
+        if (!$saved_exists) {
+            $this->create_saved_quotes_table();
+        }
     }
     
     /**
@@ -651,32 +676,42 @@ class Website_Cost_Calculator {
      * Handle quote submission via AJAX
      */
     public function handle_quote_submission() {
-        if (!wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
-            wp_send_json_error(array('message' => 'Security check failed.'));
+        // Check nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
+            wp_send_json_error(array('message' => 'Security check failed. Please refresh the page and try again.'));
+            return;
         }
         
-        $name = sanitize_text_field($_POST['name'] ?? '');
-        $email = sanitize_email($_POST['email'] ?? '');
-        $phone = sanitize_text_field($_POST['phone'] ?? '');
-        $company = sanitize_text_field($_POST['company'] ?? '');
-        $industry = sanitize_text_field($_POST['industry'] ?? '');
-        $selections = sanitize_text_field($_POST['selections'] ?? '');
-        $breakdown = sanitize_text_field($_POST['breakdown'] ?? '');
-        $subtotal = floatval($_POST['subtotal'] ?? 0);
-        $total_cost = floatval($_POST['total_cost'] ?? 0);
-        $monthly_cost = floatval($_POST['monthly_cost'] ?? 0);
-        $notes = sanitize_textarea_field($_POST['notes'] ?? '');
+        $name = isset($_POST['name']) ? sanitize_text_field($_POST['name']) : '';
+        $email = isset($_POST['email']) ? sanitize_email($_POST['email']) : '';
+        $phone = isset($_POST['phone']) ? sanitize_text_field($_POST['phone']) : '';
+        $company = isset($_POST['company']) ? sanitize_text_field($_POST['company']) : '';
+        $industry = isset($_POST['industry']) ? sanitize_text_field($_POST['industry']) : '';
+        $selections = isset($_POST['selections']) ? sanitize_text_field($_POST['selections']) : '';
+        $breakdown = isset($_POST['breakdown']) ? sanitize_text_field($_POST['breakdown']) : '';
+        $subtotal = isset($_POST['subtotal']) ? floatval($_POST['subtotal']) : 0;
+        $total_cost = isset($_POST['total_cost']) ? floatval($_POST['total_cost']) : 0;
+        $monthly_cost = isset($_POST['monthly_cost']) ? floatval($_POST['monthly_cost']) : 0;
+        $notes = isset($_POST['notes']) ? sanitize_textarea_field($_POST['notes']) : '';
         
         if (empty($name) || empty($email)) {
             wp_send_json_error(array('message' => 'Name and email are required.'));
+            return;
         }
         
         if (!is_email($email)) {
             wp_send_json_error(array('message' => 'Please enter a valid email address.'));
+            return;
         }
         
         global $wpdb;
         $table_name = $wpdb->prefix . 'wcc_quotes';
+        
+        // Check if table exists, create if not
+        $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+        if (!$table_exists) {
+            $this->create_quotes_table();
+        }
         
         $result = $wpdb->insert(
             $table_name,
@@ -698,7 +733,8 @@ class Website_Cost_Calculator {
         );
         
         if ($result === false) {
-            wp_send_json_error(array('message' => 'Failed to save quote request.'));
+            wp_send_json_error(array('message' => 'Failed to save quote request. Please try again.'));
+            return;
         }
         
         $quote_id = $wpdb->insert_id;
@@ -707,7 +743,7 @@ class Website_Cost_Calculator {
         $this->send_quote_notification($name, $email, $phone, $company, $industry, $selections, $total_cost, $monthly_cost, $notes);
         
         $options = $this->get_options();
-        $success_message = $options['form_settings']['success_message'] ?? 'Thank you! We will contact you shortly.';
+        $success_message = isset($options['form_settings']['success_message']) ? $options['form_settings']['success_message'] : 'Thank you! We will contact you shortly with a detailed quote.';
         
         wp_send_json_success(array(
             'message' => $success_message,
@@ -782,21 +818,30 @@ class Website_Cost_Calculator {
      * Handle save quote
      */
     public function handle_save_quote() {
-        if (!wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
-            wp_send_json_error(array('message' => 'Security check failed.'));
+        // Check nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
+            wp_send_json_error(array('message' => 'Security check failed. Please refresh the page and try again.'));
+            return;
         }
         
-        $quote_data = sanitize_text_field($_POST['quote_data'] ?? '');
+        $quote_data = isset($_POST['quote_data']) ? sanitize_text_field($_POST['quote_data']) : '';
         
         if (empty($quote_data)) {
             wp_send_json_error(array('message' => 'No quote data provided.'));
+            return;
+        }
+        
+        global $wpdb;
+        $table_name = $wpdb->prefix . 'wcc_saved_quotes';
+        
+        // Check if table exists, create if not
+        $table_exists = $wpdb->get_var("SHOW TABLES LIKE '$table_name'") === $table_name;
+        if (!$table_exists) {
+            $this->create_saved_quotes_table();
         }
         
         // Generate unique quote code
         $quote_code = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 8));
-        
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'wcc_saved_quotes';
         
         $result = $wpdb->insert(
             $table_name,
@@ -809,12 +854,14 @@ class Website_Cost_Calculator {
         );
         
         if ($result === false) {
-            wp_send_json_error(array('message' => 'Failed to save quote.'));
+            $error = $wpdb->last_error;
+            wp_send_json_error(array('message' => 'Failed to save quote. Please try again.'));
+            return;
         }
         
         wp_send_json_success(array(
             'quote_code' => $quote_code,
-            'message' => 'Quote saved successfully!',
+            'message' => 'Quote saved successfully! Your code is: ' . $quote_code,
         ));
     }
     
@@ -822,11 +869,13 @@ class Website_Cost_Calculator {
      * Handle load quote
      */
     public function handle_load_quote() {
-        if (!wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
-            wp_send_json_error(array('message' => 'Security check failed.'));
+        // Check nonce
+        if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'wcc_frontend_nonce')) {
+            wp_send_json_error(array('message' => 'Security check failed. Please refresh the page and try again.'));
+            return;
         }
         
-        $quote_code = sanitize_text_field($_POST['quote_code'] ?? '');
+        $quote_code = isset($_POST['quote_code']) ? sanitize_text_field($_POST['quote_code']) : '';
         
         if (empty($quote_code)) {
             wp_send_json_error(array('message' => 'No quote code provided.'));
